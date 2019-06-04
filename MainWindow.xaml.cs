@@ -1,22 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
 using Application = System.Windows.Application;
-using WinForms = System.Windows.Forms;
 
 
 namespace test
@@ -29,13 +17,40 @@ namespace test
         private static readonly InterceptKeys.LowLevelKeyboardProc _proc = HookCallback;
         private static IntPtr _hookID = IntPtr.Zero;
 
+        void OnClick1(object sender, RoutedEventArgs e)
+        {
+            btn1.Background = Brushes.LightBlue;
+        }
+
         public MainWindow()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
 
-            //ShutdownMode = ShutdownMode.OnExplicitShutdown;
+                //WindowState = WindowState.Maximized;
 
-            Application.Current.Exit += new ExitEventHandler(Current_Exit);
+                //WindowStyle = WindowStyle.None;
+
+                // need to remove this statement with out any side effects.
+                //ShutdownMode = ShutdownMode.OnExplicitShutdown;
+
+                // need to analyze this statement.
+                //Application.Current.Exit += new ExitEventHandler(Current_Exit);
+
+                /*
+                 * - opening apps on-click. google chrome!
+                 */
+                // @"%AppData%\..\Local\Google\Chrome\Application\chrome.exe" this is working statement.
+                //Process.Start(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe", "http://www.google.com");
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+           
 
             try
             {
